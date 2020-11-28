@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>DESAFIO 2</title>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="estilos.css" media="screen">
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<script type="text/javascript" src="script.js"></script>
+	<script src="http://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+	<header class="col-12 col-s-12">
+		<br>
+		<p class="titulo">APUESTAS</p>
+	</header>
+	<nav>
+		<div class="navbar" id="myNavbar">
+		 	<a class="active">OPCIONES</a>
+		  	<a href="#fac">Factorial</a>
+		  	<a href="#sumita">Suma</a>
+		  	<a href="#primo">Num Primo</a>
+		  	<a href="#ecu">Ecuaciones</a>
+		  	<a href="#encuesta">Encuesta</a>
+		  	<a href="#autor">Autor</a>
+		  	<a href="javascript:void(0);" style="font-size:15px;" class="icon" onclick="myFunction()">&#9776;</a>
+		</div>
+	</nav>	
+	<div id="fac" lass="col-12 col-s-12">
+		<div class=" tit col-12 col-s-12">
+			<p>
+				FACTORIAL
+			</p>
+		</div>
+		<div>
+			<form id="frm1" action="/action_page.php">
+				<label class="preg" for="fname">CANTIDAD DE NUMEROS (m):</label>
+				<input type='text' id="m">
+				<br>
+				<label class="preg" for="fname">AGRUPACION (n):</label>
+				<input type='text' id="n">
+				<button type="button" onclick="myFunction1()">RESOLVER</button>
+				<button type="button" onclick="myFunction2()">LIMPIAR</button>
+				<p id="demo" class="resu col-12 col-s-12"></p>
+			</form>
+		</div>
+	</div>
+	<div id="sumita" lass="col-12 col-s-12">
+		<div class=" tit col-12 col-s-12">
+			<p>
+				SUMA DE DÍGITOS
+			</p>
+		</div>
+		<div>
+			<form id="frm3" action="/action_page.php">
+				<label class="preg" for="fname">INSERTE UN NÚMERO:</label>
+				<input type='text' id="d">
+				<button type="button" onclick="digitos()">RESOLVER</button>
+				<button type="button" onclick="myFunction2()">LIMPIAR</button>
+				<p id="sumaa" class="resu col-12 col-s-12"></p>
+			</form>
+		</div>
+	</div>
+	<div id="primo" lass="col-12 col-s-12">
+		<div class=" tit col-12 col-s-12">
+			<p>
+				NÚMERO PRIMO
+			</p>
+		</div>
+		<div>
+			<form id="frm2" action="/action_page.php">
+				<label class="preg" for="fname">INSERTE UN NÚMERO:</label>
+				<input type='text' id="p">
+				<button type="button" onclick="NumPrim()">RESOLVER</button>
+				<button type="button" onclick="myFunction2()">LIMPIAR</button>
+				<p id="prim" class="resu col-12 col-s-12"></p>
+			</form>
+		</div>
+	</div>
+	<div id="ecu" lass="col-12 col-s-12">
+		<div class=" tit col-12 col-s-12">
+			<p>
+				ECUACIONES
+			</p>
+		</div>
+		<div>
+			<form id="frm4" action="/action_page.php">
+				<label class="preg" for="fname">INGRESE A</label>
+				<input type='text' id="a">
+				<label class="preg" for="fname">INGRESE B</label>
+				<input type='text' id="b">
+				<label class="preg" for="fname">INGRESE C</label>
+				<input type='text' id="c">
+				<button type="button" onclick="raiz()">RESOLVER</button>
+				<button type="button" onclick="myFunction2()">LIMPIAR</button>
+				<p id="ec" class="resu col-12 col-s-12"></p>
+			</form>
+		</div>
+	</div>
+	<div id="encuesta" class="col-12 col-s-12">
+		<div class=" tit col-12 col-s-12">
+			<p>
+				TEST
+			</p>
+		</div>
+		<div class=reglas>
+			<br>
+			<p>REGLAS</p>
+			<p>Actualice la página para poder ver la siguiente pregunta</p>
+			<p>Al dar la respuesta esta misma sera dada por la posicion en la línea en la que está</p>
+			<p>Primera linea seleccionada es posición (0)</p>
+			<p>Segunda linea seleccionada es posición (1)</p>
+			<p>Tercera linea seleccionada es posición (2)</p>
+			<p>Cuarta linea seleccionada es posición (3)</p>
+		</div>
+	</div>
+	<div class="col-12 col-s-12">
+		<div class="preg" id="pregunta"></div>
+		<div id="respuestas"></div>
+		<input class="f"type="button" value="responder" onclick="comprobar()">
+	</div>
+
+	<footer id="autor">
+		<br>
+		<div class="footer">© 2020 Copyright:
+			<p>apdlbu</p>
+	  	</div>
+	</footer>
+
+	
+
+	<script type="text/javascript">
+		var preguntas = [
+			"¿EN QUÉ ETIQUETA SE INSERTA EL PHASER?",
+			"¿CUÁL ES CORRECTO?",
+			"¿PARA QUÉ SIRVE EL ADD?"
+		];
+		var respuestas = [
+			["script", "body", "styles", "ninguna"],
+			["this.load.image","it.load.image", "this.lost.image" , "ninguna"],
+			["añadir","separar","mezclar","ninguna"]
+		];
+		var indice_aleatorio = Math.floor(Math.random()*preguntas.length);
+		var respuestas_posibles = respuestas[indice_aleatorio];
+		
+		var posiciones =[0,1,2,3]
+		var respuestas_reordenadas = [];
+
+		var indice_respuesta_correcta;
+ 
+		for (i in respuestas_posibles){
+			var posicion_aleatoria = Math.floor(Math.random()*posiciones.length);
+			if (posicion_aleatoria==0){
+				indice_respuesta_correcta = i;
+			}
+			respuestas_reordenadas[i] = respuestas_posibles[posiciones[posicion_aleatoria]];
+			posiciones.splice(posicion_aleatoria,1);
+
+		}
+
+
+		var txt_respuestas = "";
+		for (i in respuestas_reordenadas){
+			txt_respuestas += '<input type="radio" name="pp" value="la respuesta es: '+i+'"><label>'+respuestas_reordenadas[i]+'</label><br>';
+		}
+		document.getElementById("respuestas").innerHTML = txt_respuestas;
+		document.getElementById("pregunta").innerHTML = preguntas[indice_aleatorio];
+		function comprobar(){
+			var respuesta = $("input[type=radio]:checked").val();
+			alert(respuesta)
+		}
+	</script>
+
+
+
+
+</body>
+</html>
