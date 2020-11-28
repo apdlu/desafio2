@@ -65,7 +65,7 @@ header{
 
 .navbar a:hover {
   background-color: #333;
-  color: black;
+  color: white;
 }
 
 .navbar a.active {
